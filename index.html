@@ -53,15 +53,11 @@ for(;;){
         sleep(100);
 
     };
-
-    //text("继续领现金").waitFor();
     
     sleep(5000);
-    //click(100,832);
-    //var zb = className("android.widget.Image").text("O1CN01hRBLil20KeKWCH7Z0_!!6000000006831-2-tps-104-115").findOne().bounds();
     
-    //click(zb.centerX(),zb.centerY());
     className("android.widget.Image").text("O1CN01hRBLil20KeKWCH7Z0_!!6000000006831-2-tps-104-115").findOne().parent().parent().click();
+    
     sleep(3000);
     
     if(!text("去逛逛").exists() && !textContains("去搜索").exists()){
