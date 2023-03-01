@@ -12,16 +12,14 @@ for(;;){
     }
 }
 
-threads.start(function(){
-
-    tanchuang();
-
-});
-
 sleep(3000);
 
-for(i=0;i<5;i++){
+sleep(1000);
 
+for(;;){
+    
+    sleep(2000);
+                  
     if (text("立即签到").exists()) {
 
         sleep(200);
@@ -29,20 +27,34 @@ for(i=0;i<5;i++){
         text("立即签到").findOne().parent().parent().click();
 
         sleep(200);
+                  
+    //签到后的弹窗
+    if (textContains("立即领").exists()) {
 
-        break;
+        var anniu1 = textContains("立即领").findOne().parent().parent().child(3);
 
-    };
+        anniu1.click();
 
-    sleep(2000);
+    }
 
-}
 
-sleep(1000);
+    //30秒后的弹窗
+    if (textContains("去使用").exists() || textContains("浏览红包").exists()) {
 
-for(;;){
-    
-    sleep(2000);
+        sleep(200);
+
+        id("preRedBagCoordinate").findOne().parent().child(2).child(0).click();
+
+    }
+        
+        
+    if(textContains("淘金币").exists()){
+            
+        sleep(200);
+            
+        className("android.widget.Image").text("O1CN01ETK23D1NLmHkTyxrJ_!!6000000001554-2-tps-435-190.png_790x10000.jpg_").findOne().parent(). child(3).click();
+        
+    }
 
     if(text("点击领取").exists()){
 
@@ -169,38 +181,3 @@ function sousuo(){
 
 }
 
-function tanchuang(){
-
-    while(true){
-
-        //签到后的弹窗
-        if (textContains("立即领").exists()) {
-
-            var anniu1 = textContains("立即领").findOne().parent().parent().child(3);
-
-            anniu1.click();
-
-        }
-
-
-        //30秒后的弹窗
-        if (textContains("去使用").exists()) {
-
-            var anniu2 = textContains("去使用").findOne().parent().parent().child(2).child(0);
-
-            anniu2.click();
-
-        }
-        
-        
-        if(textContains("淘金币").exists()){
-            
-            sleep(200);
-            
-            className("android.widget.Image").text("O1CN01ETK23D1NLmHkTyxrJ_!!6000000001554-2-tps-435-190.png_790x10000.jpg_").findOne().parent(). child(3).click();
-        
-        }
-
-    }
-    
-}
