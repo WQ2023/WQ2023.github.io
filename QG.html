@@ -1,12 +1,6 @@
 
 auto.waitFor();
 
-setScreenMetrics(1080, 2340);
-
-var sj = random(1885, 2688);
-
-var riqi = my_today();
-
 //打开学习强国
 
 launchApp("学习强国");
@@ -16,6 +10,12 @@ toast("等待进入学习页面");
 var appxuei = app.getPackageName("学习强国");
 
 waitForPackage(appxuei);
+
+setScreenMetrics(1080, 2340);
+
+var sj = random(1885, 2688);
+
+var riqi = my_today();
 
 sleep(2688);
 
