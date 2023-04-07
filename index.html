@@ -4,9 +4,9 @@ sleep(500);
 
 for(;;){
     
-    if(className("FrameLayout").depth(14).desc("签到").exists()){
+    if(className("android.view.View").desc("签到").findOne().parent().exists()){
         
-        className("FrameLayout").depth(14).desc("签到").findOne().click();
+        className("android.view.View").desc("签到").findOne().parent().click();
         
         break;
     }
