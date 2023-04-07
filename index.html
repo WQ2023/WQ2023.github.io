@@ -16,17 +16,17 @@ for(;;){
 
 sleep(3000);
 
-threads.start(function(){
+/*threads.start(function(){
 
     tanchuan();
 
-});
+});*/
 
 sleep(1000);
 
 for(;;){
     
-    sleep(2000);
+    sleep(4000);
                   
     if (text("立即签到").exists()) {
 
@@ -34,11 +34,20 @@ for(;;){
 
         text("立即签到").findOne().parent().parent().click();
 
-        sleep(200);
+        sleep(2000);
+        
+        //签到后的弹窗
+        
+        if(textContains("去领50").exists()){
+            
+            className("android.widget.Image").text("O1CN01ETK23D1NLmHkTyxrJ_!!6000000001554-2-tps-435-190.png_790x10000.jpg_").findOne(2000).parent().child(3).click();
+        
+        };
           
     }
     
-
+    sleep(500);
+    
     if(text("点击领取").exists()){
 
         sleep(200);
@@ -49,7 +58,18 @@ for(;;){
 
     };
     
-    sleep(5000);
+    sleep(200);
+    
+    //30秒后的弹窗
+    if (textContains("去使用").exists() || textContains("浏览红包").exists()) {
+
+        sleep(200);
+
+        id("preRedBagCoordinate").findOne().parent().child(2).child(0).click();
+
+    }
+    
+    sleep(2000);
     
     className("android.widget.Image").text("O1CN01hRBLil20KeKWCH7Z0_!!6000000006831-2-tps-104-115").findOne().parent().parent().click();
     
@@ -68,14 +88,14 @@ for(;;){
         text("去逛逛").click();
     
         sleep(2000);
+        
+        for(i=1;i<7;i++){
 
         swipe(500, 900, 500, 300, 500);
 
-        sleep(16000);
+        sleep(5000);
 
-        swipe(500, 900, 500, 300, 500);
-
-        sleep(16000);
+        };
 
         back();
 
@@ -128,8 +148,6 @@ function sousuo(){
     sleep(2000);
 
     sleep(2000);
-
-    //click(155, 398);
     
     var wb = ["机箱","内存条","电源","AMD5600G","固态硬盘"];
     
@@ -140,15 +158,15 @@ function sousuo(){
     text("搜索").click();
 
     sleep(3000);
+    
+    for(i=1;i<7;i++){
 
-    swipe(500, 900, 500, 300, 500);
+        swipe(500, 900, 500, 300, 500);
 
-    sleep(20000);
+        sleep(5000);
 
-    swipe(500, 900, 500, 300, 500);
-
-    sleep(20000);
-
+    }
+    
     for(;;){
     
         if(text("继续领现金").exists() || text("连续签到领元宝").exists()){
@@ -167,31 +185,34 @@ function sousuo(){
 
 function tanchuan(){
 
-    //签到后的弹窗
-    if (textContains("立即领").exists()) {
+    for(;;){
+        //签到后的弹窗
+        if (textContains("立即领").exists()) {
 
-        var anniu1 = textContains("立即领").findOne().parent().parent().child(3);
+            var anniu1 = textContains("立即领").findOne().parent().parent().child(3);
 
-        anniu1.click();
+            anniu1.click();
 
-    }
+        }
 
 
-    //30秒后的弹窗
-    if (textContains("去使用").exists() || textContains("浏览红包").exists()) {
+        //30秒后的弹窗
+        if (textContains("去使用").exists() || textContains("浏览红包").exists()) {
 
-        sleep(200);
+            sleep(200);
 
-        id("preRedBagCoordinate").findOne().parent().child(2).child(0).click();
+            id("preRedBagCoordinate").findOne().parent().child(2).child(0).click();
 
-    }
+        }
         
         
-    if(textContains("去领50").exists()){
+        if(text("去领50淘金币").exists()){
             
-        sleep(200);
+            sleep(200);
             
-        className("android.widget.Image").text("O1CN01ETK23D1NLmHkTyxrJ_!!6000000001554-2-tps-435-190.png_790x10000.jpg_").findOne().parent(). child(3).click();
+            className("android.widget.Image").text("O1CN01ETK23D1NLmHkTyxrJ_!!6000000001554-2-tps-435-190.png_790x10000.jpg_").findOne().parent(). child(3).click();
+        
+        }
         
     }
     
