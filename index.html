@@ -1,11 +1,13 @@
 launchApp("淘宝");
 
-sleep(500);
+sleep(1000);
 
 for(;;){
     
     if(className("android.view.View").desc("签到").exists()){
         
+        sleep(500);
+
         className("android.view.View").desc("签到").findOne().parent().click();
         
         break;
