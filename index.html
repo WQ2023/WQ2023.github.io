@@ -61,11 +61,11 @@ for(;;){
     sleep(200);
     
     //30秒后的弹窗
-    if (textContains("去使用").exists() || textContains("浏览红包").exists()) {
+    if (text("去使用").exists() || textContains("浏览红包").exists()) {
 
         sleep(200);
 
-        id("preRedBagCoordinate").findOne().parent().child(2).child(0).click();
+        text("去使用").click();
 
     }
     
@@ -88,6 +88,14 @@ for(;;){
         text("去逛逛").click();
     
         sleep(2000);
+
+        if(text("去下单").exists()){
+            
+            sleep(200);
+            
+            text("去下单").click();
+        
+        };
         
         for(i=1;i<7;i++){
 
