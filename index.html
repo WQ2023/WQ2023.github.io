@@ -142,12 +142,9 @@ toast('完成了');
 
 function sousuo(){
 
-    sleep(2000);
-
-    className("android.widget.ListView").findOne().children().forEach(child => {
-        var target = child.findOne(className("android.widget.Button"));
-        target.click();
-    });
+    sleep(2000)；
+                          
+    text("去搜索").click();
 
     sleep(2000);
 
