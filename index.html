@@ -38,12 +38,8 @@ for(;;){
         
         //签到后的弹窗
         
-        if(textContains("去领50").exists()){
-            
-            className("android.widget.Image").text("O1CN01ETK23D1NLmHkTyxrJ_!!6000000001554-2-tps-435-190.png_790x10000.jpg_").findOne(2000).parent().child(3).click();
-        
-        };
-          
+        sleep(2000);
+        click(518,1721); 
     }
     
     sleep(500);
@@ -111,7 +107,7 @@ for(;;){
 
     };
 
-    if(textContains("去搜索").exists()){
+    if(text("去搜索").exists()){
 
         sousuo();
     
