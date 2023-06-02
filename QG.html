@@ -253,10 +253,12 @@ function news_today(riqi) {
 
                     toast("今日第" + jryd + "条新闻")
 
-                    sleep(30000);
+                    sleep(20000);
 
                     swipe(508,1688,518,1188,500);
 
+                    sleep(10000);
+                
                     toast('30秒');
 
                     if(text("欢迎发表你的观点").exists() && fbcs == 0){
@@ -280,10 +282,12 @@ function news_today(riqi) {
                         var fbcs = 1;
                     }
 
-                    sleep(30000);
+                    sleep(20000);
 
                     swipe(508,1688,518,1188,500);
 
+                    sleep(10000);
+                
                     toast('60秒');
 
                     sleep(2000);
@@ -617,7 +621,7 @@ function st_fs(){
     
     sleep(100);
 
-    var sy = 7 - fs;
+    var sy = 13 - fs;
     
     sleep(100);
     
