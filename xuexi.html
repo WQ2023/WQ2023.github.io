@@ -152,6 +152,14 @@ jianchap_st();
 
 sleep(500);
 
+sleep(200);
+
+tuijian();
+
+sleep(200);
+
+my_pinglun();
+
 toast('今天学习已完成');
 
 device.vibrate(1000);
@@ -167,7 +175,7 @@ function news_today(riqi) {
     
     var jryd = 1;
 
-    var fbcs = 0;
+    var fbcs = 10;
 
     while (jryd < 7) {
 
@@ -254,7 +262,7 @@ function news_today(riqi) {
 
                     huadong();
 
-                    if(text("欢迎发表你的观点").exists() && fbcs == 0){
+                    /*if(text("欢迎发表你的观点").exists() && fbcs == 0){
 
                         var pl = className("android.view.View").depth(21).indexInParent(0).findOne().text();
 
@@ -273,7 +281,7 @@ function news_today(riqi) {
                         sleep(500);
 
                         var fbcs = 1;
-                    }
+                    }*/
 
                     huadong();
 
@@ -293,7 +301,7 @@ function news_today(riqi) {
 
                         sleep(1000);
 
-                        if (fbcs == 0) {
+                        if (fbcs == 0) {
 
                             sleep(200);
 
