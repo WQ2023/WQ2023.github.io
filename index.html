@@ -23,7 +23,7 @@ sleep(3000);
 });*/
 
 sleep(1000);
-
+var cs = 1;
 for(;;){
     
     sleep(4000);
@@ -92,6 +92,11 @@ for(;;){
             sleep(5000);
 
         };
+                          
+        if(cs == 4){
+            back();
+            sleep(500);
+        }
 
         back();
 
@@ -104,6 +109,8 @@ for(;;){
         sousuo();
     
     };
+                          
+    cs++;
     
 };
 
@@ -124,7 +131,7 @@ for(;;){
 
 sleep(200);
 
-threads.shutDownAll();
+//threads.shutDownAll();
 
 device.vibrate(1000);
 
