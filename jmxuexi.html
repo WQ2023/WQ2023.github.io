@@ -47,7 +47,7 @@ ui.emitter.on("resume", function() {
 ui.star.on("click",function(){    
 
     threads.start(function(){
-
+        device.vibrate(500);
         xuexi();
 
     })
@@ -348,10 +348,6 @@ function news_today(riqi) {
 
                         var fbcs = 1;
                     }*/
-
-                    sleep(2100);
-
-                    huadong();
 
                     sleep(2000);
 
@@ -828,14 +824,14 @@ function shouye(){
 
 function huadong(){
 
-    for(i=1;i<4;i++){
+    for(i=1;i<7;i++){
 
         sleep(10000);
 
         swipe(500,1688,518,1388,500);
  
     }
-
+    toast(i*10 +"秒");
     sleep(1000);
 
 };
