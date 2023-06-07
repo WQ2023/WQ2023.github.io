@@ -1,0 +1,842 @@
+"ui";
+
+ui.layout(
+
+   <frame  bg="#c3d6dd" > 
+       
+        <linear>
+
+            <Switch id="autoService" marginTop="30" marginLeft="30" text="无障碍服务:" checked="{{auto.service != null}}" textStyle="bold" />
+        
+        </linear>        
+        
+        <button id="star" layout_gravity="center" textSize="32" textStyle="bold" text="开始学习" textColor="#FF7744"  style="Widget.AppCompat.Button" gravity="center" w="180" h="100" alpha="0.8" />
+
+        <text gravity="bottom" marginLeft="15" marginRight="15" marginBottom="20" text="此脚本需要开启无障碍服务才能运行，请先开启选项进入设置页面，点击服务(或已安装的服务），找到学习辅助开启服务。按音量下键可停止运行。-WQ" textColor="red" />
+
+
+    </frame>
+
+);
+
+ ui.autoService.on("check", function(checked) {
+
+    // 勾选无障碍服务的选项时，跳转到页面让用户去开启
+    if(checked && auto.service == null) {
+
+        app.startActivity({
+
+            action: "android.settings.ACCESSIBILITY_SETTINGS"
+
+        });
+    }
+    if(!checked && auto.service != null){
+
+        auto.service.disableSelf();
+
+    }
+});
+
+// 当用户回到本界面时，resume事件会被触发
+ui.emitter.on("resume", function() {
+
+    // 此时根据无障碍服务的开启情况，同步开关的状态
+    ui.autoService.checked = auto.service != null;
+});
+
+ui.star.on("click",function(){    
+
+    threads.start(function(){
+
+        xuexi();
+
+    })
+
+})
+
+
+
+
+var sj = random(1885, 2688);
+
+var riqi = my_today();
+
+//学习全流程
+function xuexi(){
+    
+    setScreenMetrics(1080, 2340);
+
+    var sj = random(1885, 2688);
+
+    var riqi = my_today();
+
+    //打开学习强国
+    launchApp("学习强国");
+
+    toast("等待进入学习页面");
+
+    sleep(2688);
+
+    shouye();
+
+   
+    //找到电台按钮并点击
+
+    for (; ;) {
+
+        if (id("home_bottom_tab_button_mine").exists()) {
+
+            id("home_bottom_tab_button_mine").findOne().click();
+
+            break;
+
+        }
+
+    }
+
+    sleep(1000);
+
+    //找到新闻报摘并点击
+
+    for (; ;) {
+
+        if (className("android.widget.TextView").text("听新闻报摘").exists()) {
+
+            className("android.widget.TextView").text("听新闻报摘").findOne().parent().click();
+
+            break;
+
+        }
+
+    }
+
+    sleep(1000);
+
+    //找到联播并点击
+
+    for ( ; ; ) {
+
+        sleep(1000);
+
+        if (text("中央广播电视总台-央广").exists()) {
+    
+            sleep(200);
+            
+            text("中央广播电视总台-央广").findOne().parent().parent().parent().parent().parent().click();
+    
+            sleep(200);
+    
+            break;
+    
+        }
+        else{
+
+            sleep(1000);
+
+            click(device.width/2,device.height*0.78);
+
+            break;
+        }
+    
+    }
+
+    sleep(1000);
+
+    //点击全部播放
+
+    for (; ;) {
+
+        if (className("android.widget.LinearLayout").clickable(true).depth(11).exists()) {
+
+            className("android.widget.LinearLayout").clickable(true).depth(11).findOne().click();
+
+            break;
+
+        }
+
+    }
+
+    sleep(sj);
+
+    back();
+
+    sleep(1000);
+
+    back();
+
+    sleep(sj);
+
+    //找到学习并点击
+
+    for (; ;) {
+
+        if (id("home_bottom_tab_button_work").exists()) {
+
+            id("home_bottom_tab_button_work").findOne().click();
+
+            break;
+
+        }
+
+    }
+
+    sleep(sj);
+
+    //找到订阅并点击
+
+    for (; ;) {
+
+        if (className("android.widget.TextView").text("订阅").exists()) {
+
+            className("android.widget.TextView").text("订阅").findOne().parent().click();
+
+            sleep(1000);
+
+            break;
+
+        }
+
+    }
+
+    sleep(3000);
+
+    news_today(riqi);
+
+    sleep(sj);
+
+    // sleep(500);
+
+    // my_close();
+
+    sleep(sj);
+
+    my_henan();
+
+    // sleep(2000);
+
+    // jiancha();
+    
+    sleep(sj);
+    
+    jianchap_st();
+
+    sleep(500);
+
+    // jianchap_st();
+
+    toast('今天学习已完成');
+
+    device.vibrate(1000);
+
+    sleep(1000);
+
+    exit();
+
+}
+
+//阅读新闻
+function news_today(riqi) {
+    
+    var jryd = 1;
+
+    var fbcs = 10;
+
+    while (jryd < 7) {
+
+        sleep(1000);
+
+        var all_xinwen = text(riqi).find(); //找到今天新闻
+
+        var cd = all_xinwen.length; //当前页面有几个
+
+        sleep(200);
+
+        while (cd == 0) { //向下翻页继续查找
+
+            sleep(200);
+
+            fanye();
+
+            sleep(200);
+
+            let all_xinwen = text(riqi).find(); //找到今天新闻
+
+            let cd = all_xinwen.length; //当前页面有几个
+
+            sleep(200);
+
+        }
+
+        for (t = 0; t < cd - 1; t++) {  //循环阅读新闻
+
+            sleep(100);
+
+            var x = all_xinwen[t];
+
+            sleep(100);
+
+            var xx = x.bounds();
+
+            var wz = x.bounds().centerY();
+            
+            sleep(100);
+
+            if (wz < shangzb()) {
+
+                t = t + 1;
+
+                var x = all_xinwen[t];
+
+                var xx = x.bounds();
+
+            }
+
+            sleep(100);
+
+            if (wz > xiazb()) {
+
+                sleep(100);
+
+                break;
+
+            }
+
+            sleep(100);
+
+            click(xx.centerX(), xx.centerY());
+            
+            sleep(3188);
+
+            //不是视频开始阅读
+            if (id('BOTTOM_LAYER_VIEW_ID').exists()) {
+
+                sleep(500);
+
+                if (!text("播放").exists()) {
+
+                    sleep(200);
+
+                    my_playnext();
+
+                    sleep(2000);
+
+                    back();
+
+                    toast("今日第" + jryd + "条新闻")
+
+                    sleep(2000);
+
+                    huadong();
+
+                    /*if(text("欢迎发表你的观点").exists() && fbcs == 0){
+
+                        var pl = className("android.view.View").depth(21).indexInParent(0).findOne().text();
+
+                        sleep(1000);
+
+                        text("欢迎发表你的观点").click();
+
+                        sleep(1000);
+
+                        setText(pl);
+
+                        sleep(1000);
+
+                        text("发布").click();
+
+                        sleep(500);
+
+                        var fbcs = 1;
+                    }*/
+
+                    sleep(2100);
+
+                    huadong();
+
+                    sleep(2000);
+
+                    back();
+
+                    sleep(1000);
+
+                    jryd++;
+
+                    sleep(200);
+
+                    if (jryd > 6) {
+
+                        toast('听读完成');
+
+                        sleep(1000);
+
+                        if (fbcs == 0) {
+
+                            sleep(200);
+
+                            my_close();
+
+                            sleep(200);
+
+                            tuijian();
+
+                            sleep(200);
+
+                            my_pinglun();
+
+                        }
+                        else {
+
+                            sleep(200);
+
+                            my_close();
+
+                        };
+
+                        break;                
+
+                    }
+                }
+
+                else {
+
+                    sleep(1000);
+
+                    back();
+
+                    sleep(1000);
+
+                }
+
+            }
+
+            else { //不是新闻内容就退出
+
+                sleep(2000);
+
+                back();
+
+                sleep(1000);
+
+            }
+
+        }
+
+        sleep(200);
+
+        if (jryd > 6) {
+
+            toast('听读完成');
+
+            sleep(200);
+
+            break;
+
+        }
+
+        sleep(1000);
+
+        fanye();
+
+        sleep(1000);
+
+    }
+
+}
+
+
+//获取日期
+function my_today() {
+
+    var date = new Date();
+
+    var year = date.getFullYear();
+
+    var month = TT(date.getMonth() + 1);
+
+    var day = TT(date.getDate());
+
+    return year + "-" + month + "-" + day
+
+    function TT(s) {
+
+        if (s < 10) {
+
+            s = "0" + s;
+
+        };
+
+        return s;
+
+    };
+
+}
+
+
+//发表评论
+function my_pinglun() {
+
+    bian = 0 ;
+
+    while(bian<3){
+
+        if(id('general_card_title_id').textContains("每日金句").exists()){
+
+            sleep(500);
+    
+            let aa = id('general_card_title_id').textContains("每日金句").findOne().parent().parent();
+    
+            aa.click(); 
+
+            sleep(2818);
+
+            className('TextView').text('欢迎发表你的观点').click();
+
+            sleep(1800);
+
+            var pinglun = ['牢记党的根本宗旨，想群众之所想，急群众之所急，把所有精力都用在让老百姓过好日子上。', '让发展成果更多更公平惠及全体人民。', '江山就是人民，人民就是江山。', '坚持让人民群众过上幸福生活', '不负历史、不负时代、不负人民'];
+
+            setText(pinglun[random(0, 4)]);
+
+            sleep(2688);
+
+            className('TextView').text('发布').click();
+
+            sleep(3318);
+
+            back();
+
+            sleep(500);
+
+            break; 
+    
+        } 
+    
+        fanye();
+    
+        sleep(1618);    
+
+        bian = bian + 1;
+    
+    }    
+
+}
+
+
+//下一音频
+function my_playnext() {
+
+    className("ImageView").clickable(true).depth(4).indexInParent(5).findOne().click();
+
+    sleep(sj);
+
+    className("ImageView").clickable(true).depth(4).indexInParent(4).findOne().click();
+
+    sleep(sj);
+
+    className('FrameLayout').clickable(true).depth(4).indexInParent(1).findOne().click();
+
+}
+
+
+//关闭播放
+function my_close(){
+    
+    className("android.widget.ImageView").clickable(true).depth(4).indexInParent(5).findOne().click();
+
+    sleep(sj);
+
+    className("android.widget.ImageView").clickable(true).depth(4).indexInParent(5).findOne().click();
+
+    sleep(sj);
+
+}
+
+
+//本地频道
+function my_henan(){
+
+    for(;;){
+
+        if(className("android.widget.TextView").text("河南").exists()){
+    
+            className("android.widget.TextView").text("河南").findOne().parent().click();
+    
+            break;
+    
+        }
+    
+    }
+    
+    sleep(500);
+    
+    for(;;){
+    
+        if(className("android.widget.TextView").text("河南卫视").exists()){
+    
+            className("android.widget.TextView").text("河南卫视").findOne().parent().click();
+    
+            break;
+    
+        }
+    
+    }
+
+    sleep(sj);
+
+    back();
+
+    sleep(200);
+
+    toast("本地频道已完成");
+
+}
+
+
+//监听音量键
+threads.start(function(){  //开启子线程
+
+    //监听音量键-，关闭所有脚本
+    events.observeKey();
+
+    events.onKeyDown("volume_down",function(event){//音量+改为volume_up
+
+      engines.stopAllAndToast();   
+      
+     });
+  
+})
+
+
+//检查评论是否完成
+function jiancha(){
+
+    sleep(500);
+
+    className("TextView").id("comm_head_xuexi_score").findOne().click();
+
+    sleep(2000); 
+
+    var fabiao = className("ListView").depth(23).findOne().child(11);
+
+    var f = fabiao.child(4).text();
+
+    var yi = "已完成";
+
+    if (f != yi) {
+
+        sleep(500);
+
+        back();
+
+        sleep(500);
+
+        tuijian();
+
+        sleep(1000);
+
+        my_pinglun();
+
+    }
+
+    else{
+        
+        toast("评论已完成");
+
+        sleep(200);
+
+        back();
+
+    }
+
+};
+
+
+
+function tuijian(){
+
+    for (; ;) {
+
+        if (className("android.widget.TextView").text("要闻").exists()) {
+    
+            className("android.widget.TextView").text("要闻").findOne().parent().click();
+    
+            sleep(1000);
+    
+            break;
+    
+        }
+    }
+
+    sleep(1000);
+
+    swipe(device.width*0.1,device.height*0.6,device.width*0.8,device.height*0.56,500);
+
+    sleep(1000);
+
+}
+
+
+function st_fs(){
+
+    var st = className("ListView").depth(23).findOne().child(2);
+
+    var fs = st.child(3).child(0).text();
+    
+    sleep(100);
+
+    var sy = 7 - fs;
+    
+    sleep(100);
+    
+    back();
+    
+    sleep(1000);
+    
+    zcpl(sy);
+
+}
+
+
+function zcpl(sy){
+
+    id("home_bottom_tab_button_ding").waitFor();
+    
+    id("home_bottom_tab_button_ding").click();
+    
+    sleep(2000);
+    
+    var first = className("android.widget.ListView").depth(21).findOne().child(1).bounds();
+    
+    click(first.centerX(),first.centerY());
+    
+    for(i=0;i<sy;i++){
+    
+        sleep(15000);
+    
+        swipe(device.width/2,device.height*0.8,device.width/2.1,device.height*0.4,300);
+        
+    }
+    
+    sleep(1000);
+    
+    back();
+
+    sleep(500);
+
+    jianchap_st();
+    
+}
+
+
+function jianchap_st(){
+
+    sleep(500);
+
+    className("TextView").id("comm_head_xuexi_score").findOne().click();
+
+    sleep(2000); 
+
+    var fabiao = className("ListView").depth(23).findOne().child(2);
+
+    var f = fabiao.child(4).text();
+
+    var yi = "已完成";
+
+    if (f != yi) {
+
+        sleep(500);
+
+        st_fs();        
+
+        sleep(1000);
+
+        sleep(1000);
+
+    }
+
+    else{
+        toast("视听已完成");
+
+        sleep(200);
+
+        back();
+        
+        }
+
+};
+
+function fanye(){
+
+    sleep(50);
+
+    className("ListView").scrollable(true).depth(21).findOne().scrollDown();
+
+    sleep(50);
+
+} ;
+
+
+function shangzb(){
+
+    var kj = text("订阅").findOne().parent().bounds();
+
+    var zb = kj.bottom + 8;
+
+    return zb
+
+};
+
+
+function xiazb(){
+
+    var kj = id("bottom_tab").findOne().bounds();
+
+    var zb = kj.top - 8;
+
+    return zb;
+
+};
+
+
+function shouye(){
+
+    for(i=0;i<5;i++){
+
+        sleep(1000);
+
+        if(text("我的").exists()){
+
+            sleep(200);
+
+            break;
+
+        }
+
+        back();
+
+        if(i==2 || i==4){
+            
+            sleep(200);
+
+            launchApp("学习强国");
+
+        }
+
+    }
+
+}
+
+function huadong(){
+
+    for(i=1;i<4;i++){
+
+        sleep(10000);
+
+        swipe(500,1688,518,1388,500);
+ 
+    }
+
+    sleep(1000);
+
+};
+
