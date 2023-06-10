@@ -87,9 +87,19 @@ for(;;){
         
         for(i=1;i<7;i++){
 
+            sleep(1000);
+                          
             swipe(500, 900, 500, 300, 500);
 
             sleep(5000);
+                          
+            if (text("去下单").exists()) {
+
+                sleep(200);
+
+                text("去使用").click();
+
+            };
 
         };
                           
