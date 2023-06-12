@@ -64,33 +64,37 @@ var riqi = my_today();
 //学习全流程
 function xuexi(){
     
+    auto.waitFor();
+    sleep(100);
     setScreenMetrics(1080, 2340);
+    sleep(100);
+    //打开学习强国
+    launchApp("学习强国");
+    sleep(200);
+    toast("等待进入学习页面");
 
     var sj = random(1885, 2688);
 
     var riqi = my_today();
 
-    //打开学习强国
-    launchApp("学习强国");
-
-    toast("等待进入学习页面");
-
     sleep(2688);
 
-    shouye();
 
-   
     //找到电台按钮并点击
 
     for (; ;) {
 
-        if (id("home_bottom_tab_button_mine").exists()) {
+        if (id("home_bottom_tab_button_mine").exists()) {
 
-            id("home_bottom_tab_button_mine").findOne().click();
+        id("home_bottom_tab_button_mine").findOne().click();
 
-            break;
+        break;
 
-        }
+        };
+    
+        sleep(2000);
+
+        toast("如果不是首页，请手动进入首页");
 
     }
 
