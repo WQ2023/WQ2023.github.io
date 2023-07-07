@@ -53,6 +53,18 @@ for(;;){
         sleep(100);
 
     };
+
+    sleep(500);
+    
+    if(text("点击领取").exists()){
+
+        sleep(200);
+
+        text("点击领取").findOne().click();
+
+        sleep(100);
+
+    };
     
     sleep(200);
     
